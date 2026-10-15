@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#02030a" />
   <title>Fórum UPB — Relevo generacional</title>
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./styles-corregido.css?v=2" />
   <script type="importmap">
   {
     "imports": {
@@ -14,6 +14,13 @@
     }
   }
   </script>
+  <style>
+    /* Reglas críticas de respaldo: los recursos de marca nunca cubren la presentación. */
+    .brand-lockup { display: flex; align-items: center; flex-wrap: nowrap; gap: 12px; max-width: 280px; }
+    .brand-lockup .brand-forum { width: 182px !important; max-width: 24vw !important; height: auto !important; max-height: 36px !important; }
+    .brand-lockup .brand-90 { width: 42px !important; max-width: 7vw !important; height: auto !important; max-height: 42px !important; }
+    #copy { z-index: 10; }
+  </style>
 </head>
 <body>
   <main id="app">
@@ -30,12 +37,16 @@
       <div class="brand-lockup" aria-label="UPB Fórum Centro de Eventos y 90 años">
         <img
           class="brand-logo brand-forum"
+          width="182" height="32"
+          style="display:block;width:182px;max-width:24vw;height:auto;max-height:36px;object-fit:contain;object-position:left center;flex:none;"
           src="https://juanferfranco.github.io/ForumTEDTALK/assets/brand-forum.png"
           alt="UPB Fórum Centro de Eventos"
         />
         <span class="brand-divider" aria-hidden="true"></span>
         <img
           class="brand-logo brand-90"
+          width="42" height="42"
+          style="display:block;width:42px;max-width:7vw;height:auto;max-height:42px;object-fit:contain;flex:none;"
           src="https://juanferfranco.github.io/ForumTEDTALK/assets/brand-90.png"
           alt="90 años"
         />
@@ -43,7 +54,7 @@
       <div class="counter"><span id="momentNumber">01</span><span class="slash">/</span><span>13</span></div>
     </header>
 
-    <section id="copy" class="copy">
+    <section id="copy" class="copy" aria-live="polite">
       <p id="kicker" class="kicker">Future Leaders Forum · Fórum UPB</p>
       <h1 id="title">RELEVO GENERACIONAL: LA VENTAJA QUE NADIE ESTÁ APROVECHANDO</h1>
       <p id="subtitle" class="subtitle">@centrodeeventosupb</p>
@@ -69,6 +80,6 @@
     <div class="help">Espacio / → avanzar · ← volver · F fullscreen · H ocultar interfaz · R reiniciar</div>
   </main>
 
-  <script type="module" src="./main.js"></script>
+  <script type="module" src="./main-corregido.js?v=2"></script>
 </body>
 </html>

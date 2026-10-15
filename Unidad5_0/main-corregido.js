@@ -343,27 +343,42 @@ moments.forEach((_, i) => {
 
 function updateUI(index) {
   const m = moments[index];
-  copyEl.classList.add('is-changing');
-  setTimeout(() => {
-    numberEl.textContent = String(index + 1).padStart(2, '0');
-    kickerEl.textContent = m.kicker;
-    titleEl.textContent = m.title;
-    subtitleEl.textContent = m.subtitle;
+  // Actualización inmediata: nunca desaparece el texto al cambiar de escena.
+  numberEl.textContent = String(index + 1).padStart(2, '0');
+  kickerEl.textContent = m.kicker;
+  titleEl.textContent = m.title;
+  subtitleEl.textContent = m.subtitle;
 
-    if (m.asset) {
-      momentImageEl.src = m.asset;
-      momentImageEl.alt = m.title;
-      momentAssetEl.classList.add('visible');
-    } else {
+  // Evitar mostrar la imagen del momento anterior mientras carga la nueva.
+  momentAssetEl.classList.remove('visible');
+  if (m.asset) {
+    const url = m.asset;
+    momentImageEl.onload = () => {
+      if (moments[momentIndex].asset === url) momentAssetEl.classList.add('visible');
+    };
+    momentImageEl.onerror = () => {
       momentAssetEl.classList.remove('visible');
-      momentImageEl.removeAttribute('src');
-      momentImageEl.alt = '';
+      console.warn('Imagen no disponible:', url);
+    };
+    momentImageEl.alt = m.title;
+    momentImageEl.src = url;
+    if (momentImageEl.complete && momentImageEl.naturalWidth > 0) {
+      momentAssetEl.classList.add('visible');
     }
+  } else {
+    momentImageEl.onload = null;
+    momentImageEl.onerror = null;
+    momentImageEl.removeAttribute('src');
+    momentImageEl.alt = '';
+  }
 
-    qrLayerEl.classList.toggle('visible', index === moments.length - 1);
-    [...dotsEl.children].forEach((d, i) => d.classList.toggle('active', i === index));
-    copyEl.classList.remove('is-changing');
-  }, 160);
+  qrLayerEl.classList.toggle('visible', index === moments.length - 1);
+  [...dotsEl.children].forEach((d, i) => d.classList.toggle('active', i === index));
+
+  // Reiniciar animación CSS sin ocultar la sección entre momentos.
+  copyEl.classList.remove('is-changing');
+  void copyEl.offsetWidth;
+  copyEl.classList.add('is-changing');
 }
 
 function setMoment(index) {
@@ -378,6 +393,8 @@ function setMoment(index) {
 }
 
 function resetPresentation() {
+  uiHidden = false;
+  app.classList.remove('ui-hidden');
   previousMomentIndex = momentIndex;
   momentIndex = 0;
   transitionStart = clock.elapsedTime;
@@ -641,4 +658,5 @@ window.addEventListener('resize', () => {
 
 // First state and render.
 transitionStart = clock.elapsedTime;
+updateUI(0);
 renderFrame();
