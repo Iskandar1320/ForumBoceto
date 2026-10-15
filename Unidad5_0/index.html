@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#02030a" />
+  <title>Fórum UPB — Relevo generacional</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <main id="app">
+    <canvas id="scene"></canvas>
+
+    <figure id="momentAsset" class="moment-asset" aria-hidden="true">
+      <img id="momentImage" alt="" />
+    </figure>
+
+    <div class="vignette"></div>
+    <div class="grain"></div>
+
+    <header class="topbar">
+      <div class="brand-lockup" aria-label="UPB Fórum Centro de Eventos y 90 años">
+        <img
+          class="brand-logo brand-forum"
+          src="https://juanferfranco.github.io/ForumTEDTALK/assets/brand-forum.png"
+          alt="UPB Fórum Centro de Eventos"
+        />
+        <span class="brand-divider" aria-hidden="true"></span>
+        <img
+          class="brand-logo brand-90"
+          src="https://juanferfranco.github.io/ForumTEDTALK/assets/brand-90.png"
+          alt="90 años"
+        />
+      </div>
+      <div class="counter"><span id="momentNumber">01</span><span class="slash">/</span><span>13</span></div>
+    </header>
+
+    <section id="copy" class="copy">
+      <p id="kicker" class="kicker">Future Leaders Forum · Fórum UPB</p>
+      <h1 id="title">RELEVO GENERACIONAL: LA VENTAJA QUE NADIE ESTÁ APROVECHANDO</h1>
+      <p id="subtitle" class="subtitle">@centrodeeventosupb</p>
+    </section>
+
+    <aside id="qrLayer" class="qr-layer" aria-label="Enlaces de cierre">
+      <a class="qr-block" href="https://juanferfranco.github.io/ForumTEDTALK/" target="_blank" rel="noopener noreferrer">
+        <img src="https://juanferfranco.github.io/ForumTEDTALK/assets/qr-memory.png" alt="QR Memorias" />
+        <span>Memorias</span>
+      </a>
+      <a class="qr-block" href="https://www.instagram.com/centrodeeventosupb/" target="_blank" rel="noopener noreferrer">
+        <img src="https://juanferfranco.github.io/ForumTEDTALK/assets/qr-social.png" alt="QR Instagram Centro de Eventos UPB" />
+        <span>@centrodeeventosupb</span>
+      </a>
+    </aside>
+
+    <nav class="controls" aria-label="Navegación de la presentación">
+      <button id="prev" type="button" aria-label="Momento anterior">‹</button>
+      <div id="dots" class="dots" aria-hidden="true"></div>
+      <button id="next" type="button" aria-label="Momento siguiente">›</button>
+    </nav>
+
+    <div class="help">Espacio / → avanzar · ← volver · F fullscreen · H ocultar interfaz · R reiniciar</div>
+  </main>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
